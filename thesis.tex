@@ -40,7 +40,7 @@
   \textbf{LLM-Driven Algorithmic Trading: A Reinforcement Learning Fine-Tuning Framework} \\[0.5em]
   \large A Master's Thesis
 }
-\author{Adham \\ \small Supervisors: Prof. Mohamed Ashour \& Prof. Ayman El Badawy \\ \small Department of Computer Science}
+\author{Adham Helmy \\ \small Supervisors: Prof. Mohamed Ashour \& Prof. Ayman El Badawy \\ \small Department of Computer Science}
 \date{\today}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -65,7 +65,7 @@
 \section{Financial Markets}
 \label{sec:fin-markets}
 
-Financial markets are complex, nonlinear, and dynamic systems influenced by a wide range of factors.
+  Financial markets are complex, nonlinear, and dynamic systems influenced by a wide range of factors.
 The stochastic nature of price movements, combined with high volatility and non-stationarity, makes
 modeling and decision-making in financial markets particularly challenging. As a result, statistical
 and computational models have become essential tools for extracting meaningful information from market
@@ -120,7 +120,7 @@ The contributions of this paper are as follows:
   \item We introduce a novel framework for trading strategy generation using large language models
         fine-tuned with reinforcement learning.
   \item We apply the Group Relative Policy Optimisation (GRPO) algorithm to specialise a language
-        model for financial decision-making.
+        model for trading strategy generation.
   \item We conduct a systematic comparison of model performance before and after training,
         including analysis of key training hyperparameters.
   \item We benchmark several open-source LLMs on the proposed task.
@@ -134,6 +134,8 @@ The contributions of this paper are as follows:
 The remainder of this paper is structured as follows.
 \Cref{ch:background} reviews the advancement of artificial intelligence in the fields of
 algorithmic trading and portfolio management.
+\Cref{ch:related} surveys work directly related to our approach, covering LLM-based trading
+systems and reinforcement fine-tuning methods.
 \Cref{ch:method} describes the experimental setup and motivates each design decision in our
 proposed framework.
 \Cref{ch:experiments} presents the results and compares our approach against several industry
@@ -141,7 +143,7 @@ benchmarks and frameworks from the literature.
 Finally, \cref{ch:conclusion} offers conclusions, reflections, and directions for future work.
 
 % ── Chapter 2 – Background ───────────────────────────────────────────────────
-\chapter{Background and Related Work}
+\chapter{Background}
 \label{ch:background}
 
 Algorithmic trading as a research area has gained considerable attention in recent years.
@@ -219,7 +221,7 @@ trading strategies \cite{huang2024novel}.
 \subsection{Actor-Only (Policy-Based) Methods}
 \label{sec:policy-based}
 
-Policy-based methods, such as REINFORCE and policy gradient algorithms, are formalised as
+Policy-based methods and policy gradient algorithms, are formalised as
 optimisation problems. Unlike value-based approaches, policy-based methods do not estimate a
 value function; instead, they directly learn a stochastic policy $\pi_\theta(a \mid s)$ that
 maps states to a distribution over actions, optimising the policy parameters $\theta$ to
@@ -238,16 +240,13 @@ actions and the critic evaluates them, providing a lower-variance signal for pol
 \cite{ge2022,lima2021,liu2020actorcritic,ponomarev2019,vishal2021}.
 
 % ── 2.3 ──────────────────────────────────────────────────────────────────────
-\section{Large Language Models}
+\section{Large Language Models in Finance}
 \label{sec:llms}
 
 The advancement of Large Language Models (LLMs) has revolutionised natural language
 processing and demonstrated remarkable potential across a wide range of domains, including
 healthcare \cite{TODO-healthcare}, education \cite{TODO-education}, and the financial
 sector, which has attracted particularly significant research interest.
-
-\subsection{Applications of LLMs in Equity Markets}
-\label{sec:llm-equity}
 
 Since the public release of ChatGPT, research into LLM applications in stock and equity
 markets has grown rapidly. A comprehensive survey \cite{TODO-survey84} of 84
@@ -262,25 +261,117 @@ integrate qualitative information---such as news and analyst reports---into thei
 pipelines, while \cite{valeyre2024,wang2024ts,chen2024ts,voigt2024,wang2024b} focus on
 time-series forecasting with LLMs.
 
-\paragraph{Other application areas.}
-Beyond price forecasting, LLMs have been applied to sentiment analysis (extracting and
-quantifying market sentiment from text), automated trading (autonomous decision-making
-systems), investment analysis (streamlining equity research), portfolio management (optimising
-asset allocations), risk management (addressing robustness and reliability in financial
-contexts), and financial content generation \cite{TODO-survey84}.
+\paragraph{Sentiment analysis.}
+Research in this category focuses on extracting and interpreting sentiment from a range of
+sources such as news, social media, and financial reports.
+\cite{deng2022reddit,das2024wealthguide,wu2024llmnews,zhao2024welsch,aparicio2024,liu2024sentiment,xing2024,dolphin2024,yu2023bench,kirtac2024}
+extract sentiment insights from financial text, reflecting methodologies ranging from basic
+lexical scoring to agent-based approaches.
+Sentiment scoring is also featured in \cite{bond2023,lefort2024}, converting sentiment into
+numerical signals that directly inform trading strategies.
 
-\subsection{LLMs in Financial Trading}
+\paragraph{Automated trading and decision systems.}
+Many research efforts are dedicated to building autonomous trading systems
+\cite{yu2024fincon,kou2024,zhang2024stockagent,xiao2024trading,li2023tradinggpt,yu2023finmem,wang2024trading,li2024cryptotrade}.
+Some works additionally integrate sentiment analysis for trading and portfolio management
+\cite{konstantinidis2024,chen2024wisdom}.
+\cite{saqur2024} incorporate reinforcement learning, while \cite{yang2024finrobot} provide
+an agent platform that broadens access for researchers and practitioners.
+
+\paragraph{Investment and equity research.}
+\cite{papasotiriou2024,li2023multimodal,zhou2024finrobot,yue2023,kim2024} use LLMs to
+automate investment and equity research and analysis.
+\cite{fatouros2024} propose a framework for stock selection, which \cite{fatouros2025}
+extends and optimises for portfolio management.
+\cite{wang2023alphagpt} models researchers trading strategy proposals, while \cite{wang2024b} models investor
+behaviour.
+A further strand focuses on explainability, developing frameworks to enhance model
+interpretability \cite{koa2024explainable,lopezlira2023,tong2024,zhao2024portfolio} and
+comparing interpretability across general-purpose LLMs \cite{abdelsamie2024}.
+
+\paragraph{Portfolio management.}
+\cite{lu2023chatgpt,ko2024,huang2024portfolio,zhao2024portfolio,perlin2024} focus on
+portfolio management using approaches ranging from traditional optimisation methods to
+reinforcement learning.
+Portfolio management advice is explored by \cite{fieberg2024,lu2025}.
+
+\paragraph{Risk management.}
+\cite{glasserman2023,park2024,koa2024temporal,yang2025twinmarket} addressed the reliability of LLMs in equity markets and the identification of
+unusual market conditions or portfolio crashes.
+
+\paragraph{Financial content generation and data integration.}
+\cite{nishida2025,pop2024} automate the production of financial writing such as news articles
+and equity research reports.
+\cite{liu2023fingpt} introduce FinGPT, a framework for democratising access to financial LLMs.
+
+\paragraph{Benchmarking and surveys.}
+\cite{zhao2024llmsurvey,nie2024survey,kong2024applications,kong2024models,ding2024survey}
+offer broad overviews of LLM applications in finance.
+\cite{li2024investorbench,mateega2025,krause2023} focus on benchmark development, enabling
+more standardised comparisons and evaluations of LLM performance in financial tasks.
+\cite{abdelsamie2024} benchmark specialised financial LLMs against human analysts and
+general-purpose models.
+\cite{bi2024,chiang2025} examine the practical potential and limitations of LLMs,
+underscoring the need for ongoing evaluation in this rapidly evolving field.
+
+% ── Chapter 3 – Related Work ─────────────────────────────────────────────────
+\chapter{Related Work}
+\label{ch:related}
+
+\section{LLMs in Financial Trading}
 \label{sec:llm-trading}
 
-As outlined above, LLMs offer substantial potential across financial market applications. With
-a focus on trading specifically, implementations are broadly categorised \cite{TODO-llm-trading-survey}
+As previously outlined, LLMs offer substantial potential across financial market applications. With
+a focus on trading specifically, implementations are broadly categorised \cite{ding2026largelanguagemodelagent}
 into two paradigms: \emph{LLMs as traders}, which directly generate buy, hold, or sell
-decisions from inputs such as price data, news, and financial reports
-\cite{TODO-llm-trader-refs}; and \emph{LLMs as alpha miners}, which generate alpha
-factors---quantitative signals encoding predictive information---rather than explicit trading
-decisions \cite{TODO-alpha-factor,TODO-alpha-miner-refs}.
+decisions from inputs such as price data, news, and financial reports and \emph{LLMs as alpha miners}, which generate alpha
+factors---quantitative signals encoding predictive information---rather than explicit trading decisions.
 
-\subsection{Reinforcement Fine-Tuning}
+\subsection{LLMs as Traders}
+\label{sec:llm-traders}
+Many studies incorporating LLMs as traders were mentioned in \cref{sec:llms}. Additionally, \cite{ding2026largelanguagemodelagent} further highlights 
+subcategories of LLM-based trading systems.
+
+\paragraph{News-Driven.}
+
+Financial sentiment analysis, of stock news and financial updates, scores are incorporated in the trading strategy \cite{lopezlira2023, wu2024llmnews}.
+Further research, demonstrated performance enhancement with LLMs fine-tuned with financial related dataset aligning LLMs with domain-specific knowledge \cite{kirtac2024, zhang2024chinese}.
+While, more advanced architectures, involved summarisation and reasoning to identify and analyse relationship between historical news and corresponding price movement \cite{fatouros2024, wang2024llmfactor}.
+
+\paragraph{Reflection-Driven.}
+
+Reflection, built on extracted memory using summarization, high-level knowledge and insights are progressively aggregated from raw memories and observations \cite{park2023generative}.
+The raw inputs are summarized into memories, relevant memories are retrieved and integrated with new observations to produce reflections, which are then utilized to generate trading decisions \cite{yu2023finmem}.
+\cite{zhang2024multimodal} further proposes a multimodal agent that takes in numeric, text and image data. And, incorporates technical indicators and a human analyst to more effectively capture market dynamics.
+
+\paragraph{Debate-Driven.}
+
+Debating among LLMs, proven to be an effective method to enhance the reasoning and factual validity, is also widely adopted in LLM financial agents.
+\cite{xing2024} proposed a debating framework where LLM agents with different roles debate each other, improving news sentiment classification performance.
+\cite{li2023tradinggpt} proposed a similar architecture to \cite{yu2023finmem} with an additional step that agents debate each other’s actions and reflections, improving robustness of reflections.
+
+\paragraph{Reinforcement Learning Driven.}
+
+Reinforcement learning methods, have proven effective in aligning LLM outputs with expected behaviors \cite{ouyang2022instructgpt, lee2023rlaif}.
+Backtesting provides a cost-effective method for generating high-quality feedback on trading decisions that can serve as rewards.
+\cite{koa2024explainable} proposed leveraging reinforcement learning with memorization and reflection modules, utilizing a series of predictions derived from financial market history to refine predictions in real-world markets.
+While, \cite{ding2023} developed a RL-based framework, where an LLM is used to generate embeddings from news headlines, which are then projected into the stock feature space.
+
+\subsection{LLM as an Alpha Miner}
+\label{sec:llm-alphaminer}
+
+Another effective approach is using LLMs as Alpha Miners, where the LLM generates alpha factors instead of directly making trading decisions. 
+\cite{wang2024quantagent} demonstrated this by introducing a principled framework, comprising of a two-layer loop. In the inner loop,
+an agent takes in a general idea from a human trader and generates a script as its implementation.
+Another agent provides feedback to refine the script, the agent refines its responses by drawing from its knowledge base.
+While in the outer loop, committed code is backtested in real-world scenarios and the results are used to automatically enhance the knowledge base with new insights,
+enabling the agent to progressively approximate optimal behaviour with provable efficiency. In a subsequent research,
+\cite{wang2023alphagpt} propose a human in the loop on a similar architecture and experimental environment, 
+to provide a heuristic way to ``understand'' the ideas of quant researchers and outputs creative, insightful, and effective alphas. 
+Both studies demonstrates the effectiveness and efficiency of the LLM powered alpha mining, a conventionally resource intensive job, 
+via a number of alpha mining experiments.
+
+\section{Reinforcement Fine-Tuning}
 \label{sec:rft}
 
 Reinforcement Fine-Tuning (RFT) adapts a pretrained language model using a scalar feedback
@@ -293,11 +384,23 @@ particularly effective for domain-specific tasks \cite{TODO-openai-rft} and enab
 alignment of model behaviour to objectives such as stylistic consistency, safety, or---most
 relevantly here---domain accuracy in financial decision-making.
 
-% ── Chapter 3 – Methodology ──────────────────────────────────────────────────
+While, some studies use reinforcement learning as a module or part of the framework, 
+such as \cite{yu2023finmem, yu2024fincon, gu2024margin, ding2023}; others, more notably, 
+incorporate reinforcement fine-tuning, directly updating model weights in real-time to adapt and align the model to financial trading tasks \cite{saqur2024, ni2024, liu2023fingpt, zhao2024welsch}.
+
+\cite{saqur2024} introduces Reinforcement Learning from Market Feedback (RLMF),
+a regime-adaptive market execution method, to dynamically adjust LLM behaviour,
+enabling LLMs to adapt continuously to evolving market dynamics. \cite{liu2023fingpt} introduces FinGPT,
+an open-sourced framework that adapts general-purpose LLMs for applications,
+including robo-advisory and sentiment analysis for algorithmic trading using LoRA/QLoRA fine-tuning.
+Reinforcement learning can also be integrated with instruction finetuning to further refine model performance based on real-world feedback \cite{zhao2024welsch}.
+\cite{ni2024} introduces an advanced approach by employing LLMs instruction fine-tuned with a novel combination of instruction-based techniques and QLoRA compression. 
+
+% ── Chapter 4 – Methodology ──────────────────────────────────────────────────
 \chapter{Methodology}
 \label{ch:method}
 
-% ── 3.1 ──────────────────────────────────────────────────────────────────────
+% ── 4.1 ──────────────────────────────────────────────────────────────────────
 \section{Algorithm}
 \label{sec:algorithm}
 
@@ -404,7 +507,7 @@ it is nonetheless \emph{verifiable}: a generated strategy either produces positi
 returns when back-tested or it does not. This makes GRPO an appropriate training
 algorithm for our setting.
 
-% ── 3.2 ──────────────────────────────────────────────────────────────────────
+% ── 4.2 ──────────────────────────────────────────────────────────────────────
 \section{System Overview}
 \label{sec:system}
 
@@ -479,12 +582,12 @@ ordered from worst (most penalised) to best:
     \toprule
     Rank & Outcome & Reward \\
     \midrule
-    1 & No strategy generated, or class has empty methods & $r_{\min}$ (heavy penalty) \\
-    2 & Syntactically invalid code                        & $r_{\min}$ (heavy penalty) \\
-    3 & Strategy throws a runtime error during back-test  & $r_{\min}$ (heavy penalty) \\
-    4 & Strategy generates no trading signals             & $0$ \\
+    1 & No strategy generated, or class has empty methods & $-10$ (heavy penalty) \\
+    2 & Syntactically invalid code                        & $-3$ (heavy penalty) \\
+    3 & Strategy throws a runtime error during back-test  & $-2$ (heavy penalty) \\
+    4 & Strategy generates no trading signals             & $-1$ \\
     5 & Strategy results in negative returns              & $0$ \\
-    6 & Strategy results in positive returns              & $R$ (the actual return) \\
+    6 & Strategy results in positive returns              & $R$ (annual return) \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -494,55 +597,29 @@ to produce syntactically and semantically correct Backtrader strategies before a
 financial objective can be pursued. Negative returns are assigned a reward of zero
 rather than a negative value: while a strategy with negative returns is undesirable, it
 is strictly better than one that is syntactically invalid or generates no signals at
-all. For positive returns, the reward is set equal to the realised return $R$, so that
+all. For positive returns, the reward is set equal to the annualised return $R$, so that
 higher returns receive proportionally higher rewards, incentivising the model to
 discover increasingly profitable strategies.
 
-% ── Chapter 4 – Experiments ──────────────────────────────────────────────────
+% ── Chapter 5 – Experiments ──────────────────────────────────────────────────
 \chapter{Experiments}
 \label{ch:experiments}
 
 \section{Setup}
 
-Describe datasets, hardware, baselines, and evaluation metrics.
-
-\begin{table}[h]
-  \centering
-  \caption{Dataset statistics.}
-  \label{tab:datasets}
-  \begin{tabular}{lccc}
-    \toprule
-    Dataset & Train & Val & Test \\
-    \midrule
-    Dataset A & 10{,}000 & 1{,}000 & 2{,}000 \\
-    Dataset B &  5{,}000 &   500 & 1{,}000 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 \section{Results}
-
-Present your main quantitative results.
 
 \section{Analysis}
 
-Ablation studies, qualitative examples, error analysis, etc.
-
-% ── Chapter 5 – Conclusion ───────────────────────────────────────────────────
+% ── Chapter 6 – Conclusion ───────────────────────────────────────────────────
 \chapter{Conclusion}
 \label{ch:conclusion}
 
 \section{Summary}
 
-Briefly recap what you did and what you found.
-
 \section{Limitations}
 
-Be honest about the shortcomings of your approach.
-
 \section{Future Work}
-
-Suggest directions for follow-up research.
 
 % ── Bibliography ─────────────────────────────────────────────────────────────
 \bibliographystyle{IEEEtran}
