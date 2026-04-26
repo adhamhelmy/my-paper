@@ -71,15 +71,6 @@ modeling and decision-making in financial markets particularly challenging. As a
 and computational models have become essential tools for extracting meaningful information from market
 data and supporting trading and investment decisions.
 
-\section{Investor Requirements}
-\label{sec:investor-req}
-
-Investment strategies must align with the objectives and constraints of investors, which typically
-involve balancing returns against various forms of risk. These requirements impose practical limitations
-on the design and deployment of trading and portfolio management systems. Metrics such as the
-Sharpe ratio, maximum drawdown, and portfolio turnover must therefore be considered alongside raw
-return when evaluating any proposed framework.
-
 \section{Motivation for Intelligence}
 \label{sec:motivation}
 
@@ -121,12 +112,7 @@ The contributions of this paper are as follows:
         fine-tuned with reinforcement learning.
   \item We apply the Group Relative Policy Optimisation (GRPO) algorithm to specialise a language
         model for trading strategy generation.
-  \item We conduct a systematic comparison of model performance before and after training,
-        including analysis of key training hyperparameters.
-  \item We benchmark several open-source LLMs on the proposed task.
-  \item We investigate the performance differential between non-reasoning and
-        reasoning-oriented model architectures.
-\end{itemize}
+  \end{itemize}
 
 \section{Thesis Outline}
 \label{sec:outline}
@@ -158,8 +144,8 @@ directions: \emph{prediction-based methods} and \emph{reinforcement learning-bas
 \label{sec:pred-models}
 
 
-The goal of prediction models, as the name suggests, is to forecast the price of an asset
-based on historical data, technical indicators, and in some cases sentiment analysis scores.
+The goal of prediction models, is to forecast the price of an asset
+based on historical data, technical indicators, and sentiment analysis scores.
 Using deep neural networks as universal function approximators, researchers have sought to
 design architectures suited to financial time series. This has motivated the development of
 Recurrent Neural Networks (RNNs) and their successor, Long Short-Term Memory (LSTM) networks,
@@ -169,7 +155,7 @@ both of which are capable of capturing temporal dependencies in sequential data.
 The body of literature in this space is extensive \cite{huang2024novel}.
 Studies \cite{roondiwala2017predicting,shah2021stock,sunny2020deep,zhang2021forecasting,yu2022research,qiao2022prediction,md2022novel,bansal2022stock}
 used variations of LSTM and BiLSTM networks.
-Hybrid models combining CNN, BiLSTM, and attention mechanisms were employed in
+Hybrid models combining CNN, BiLSTM, and different attention mechanisms were employed in
 \cite{lu2020cnn,wu2021graph,huang2021financial,juairiah2022stock,kumar2022ensemble,xu2022hybrid,pholsri2023intraday,shi2023integrated}.
 News headlines and sentiment analysis techniques were further integrated in
 \cite{sridhar2021news,sharaf2022efficient}. These contributions represent only a fraction of the current research
@@ -182,9 +168,7 @@ in this approach: practitioners must still construct trading strategies around t
 predictions, adding further layers of complexity. Human intuition and theoretical assumptions
 are typically required to bridge the gap between a price forecast and a concrete trading
 decision. Critically, higher prediction accuracy does not guarantee higher returns
-\cite{huang2024novel}. This motivates the second group of intelligent trading strategies,
-reinforcement learning, in which the agent directly interacts with the environment, building
-real-time strategies based on back-testing results.
+\cite{huang2024novel}. This motivates reinforcement learning, the second group of intelligent trading strategies.
 
 % ── 2.2 ──────────────────────────────────────────────────────────────────────
 \section{Reinforcement Learning}
@@ -202,10 +186,9 @@ price data, technical indicators, or candlestick representations; (ii) takes an
 \emph{action}, which may be a discrete buy/hold/sell signal, a continuous position size, or
 a portfolio weight vector; and (iii) receives a \emph{reward}, which may be the raw return,
 or a risk-adjusted metric such as the Sharpe ratio or the Sortino ratio. Traditional RL
-algorithms are categorised into value-based, policy-based, and actor-critic methods, each of
-which is discussed below.
+algorithms are categorised into value-based, policy-based, and actor-critic methods.
 
-\subsection{Critic-Only (Value-Based) Methods}
+\paragraph{Critic-Only (Value-Based)}
 \label{sec:value-based}
 
 In value-based methods, such as Temporal Difference learning \cite{sutton1988td} and
@@ -218,7 +201,7 @@ Reinforcement Learning (DRL) in single-asset trading include
 Notably, value-based methods are the most widely adopted DRL approach for single-asset
 trading strategies \cite{huang2024novel}.
 
-\subsection{Actor-Only (Policy-Based) Methods}
+\paragraph{Actor-Only (Policy-Based)}
 \label{sec:policy-based}
 
 Policy-based methods and policy gradient algorithms, are formalised as
@@ -229,7 +212,7 @@ maximise the expected cumulative return \cite{sutton1999pg}. DRL trading strateg
 implemented with policy-based methods include
 \cite{lele2020,liu2021policy,mahayana2022,wang2021policy,xiao2023}.
 
-\subsection{Actor-Critic Methods}
+\paragraph{Actor-Critic}
 \label{sec:actor-critic}
 
 Actor-critic algorithms combine elements of both paradigms: an \emph{actor} maintains and
@@ -511,7 +494,7 @@ algorithm for our setting.
 \section{System Overview}
 \label{sec:system}
 
-Our implementation uses the \textbf{Unsloth} library \cite{TODO-unsloth} to load and
+Our implementation uses the \texttt{Unsloth} library \cite{unsloth2024} to load and
 fine-tune the language model. Unsloth supports several reinforcement fine-tuning
 algorithms, including GRPO, GSPO, and DPO. The pipeline operates as follows.
 
@@ -565,7 +548,7 @@ DO NOT output anything else.
 
 \paragraph{Back-testing.}
 Once the model produces an output, the strategy class is extracted via regex and passed
-to our back-testing setup. \textbf{Backtrader} \cite{TODO-backtrader} is a
+to our back-testing setup. \texttt{Backtrader} \cite{backtrader2024} is a
 Python-based strategy back-testing framework. Look-ahead bias---in which a strategy
 inadvertently accesses future price data during simulation---is explicitly prohibited by
 the prompt constraints and enforced by the Backtrader execution environment.
@@ -605,11 +588,89 @@ discover increasingly profitable strategies.
 \chapter{Experiments}
 \label{ch:experiments}
 
-\section{Setup}
+\section{Experimental Setup}
+The model was trained on a single NVIDIA A100 GPU with 80GB of VRAM. We used the \texttt{Unsloth} library \cite{unsloth2024} to inference and
+fine-tune the language model. Model was trained for 500 steps, with a learning rate of 5e-6, weight decay of 0.01, adam optimizer and gradient accumulation steps set to 8. Model was tested before and after training to evaluate the improvement in strategy generation performance.
+The training process was monitored using Weights \& Biases \cite{wandb2024}, which provided real-time tracking of training metrics, rewards, and model outputs. 
 
-\section{Results}
+\section{Dataset}
+The proposed method was trained on historical stock prices of 38 US stocks, which are the constituents of the Dow Jones Industrial Average (DIJA) index, in addition to 8 additional stocks AMZN, COIN, GE, GOOGL, NFLX, NIO, TSLA, UVV, for the ten years from 2012-1-01 to 2022-12-31. The data was sourced from Alpha Vantage \cite{alphavantage2024}, a provider of free stock APIs. The data was preprocessed to ensure compatibility with the Backtrader framework. 
+And, tested against the same dataset, from 2022-1-01 to 2025-12-31, to evaluate model performance and compared against several baselines and benchmarks from the literature.
+\section{Evaluation Metrics}
+We employ a widely used set of financial performance metrics to evaluate the generated trading
+strategies and compare against several baselines from the literature.
+These metrics include:
 
-\section{Analysis}
+\begin{itemize}
+  \item \textbf{Cumulative Return (CR):} CR measures the total return on an investment over a
+  specified period, representing the cumulative effect of all returns since the start of the
+  investment horizon. Let $W_T$ denote the final portfolio value and $W_0$ the initial capital:
+  \begin{equation}
+    \text{CR} = \frac{W_T - W_0}{W_0} \times 100
+  \end{equation}
+
+  \item \textbf{Annualised Return (AR):} AR is the annualised average profit-and-loss (\%)
+  provided by an investment during trading.  
+  \begin{equation}
+    \text{AR} = \left[\left(1 + \text{CuR}\right)^{\frac{365}{\text{Days Held}}} - 1\right] \times 100
+  \end{equation} where Let $\text{CuR} = \sum_{t=1}^{T}
+  \frac{C_t - C_{t-1}}{C_{t-1}}$
+
+  \item \textbf{Sharpe Ratio (ShR):} ShR measures the average excess return per unit of total
+  risk. Let $\mathbb{E}\{R_p\}$ be the expected portfolio return, $R_f$ the risk-free rate, and
+  $\sigma_p$ the portfolio standard deviation. We assume $R_f = 0$:
+  \begin{equation}
+    \text{ShR} = \frac{\mathbb{E}\{R_p\} - R_f}{\sigma_p}
+  \end{equation}
+
+  \item \textbf{Maximum Drawdown (MDD):} MDD captures the largest peak-to-trough decline in
+  portfolio value before a new peak is reached, measuring worst-case loss experienced over the
+  evaluation period:
+  \begin{equation}
+    \text{MDD} = \max_{t \in [0,T]} \frac{\displaystyle\max_{\tau \in [0,t]} W_\tau - W_t}{\displaystyle\max_{\tau \in [0,t]} W_\tau}
+  \end{equation}
+\end{itemize}
+
+\section{Baseline Methods}
+To contextualise the performance of our GRPO-trained model, we compare our model agains baseline, reinforcment learning-based, and LLM-based methods from the literature. 
+\begin{itemize}
+  \item \textbf{Traditional rule-based strategies}
+    \begin{itemize}
+      \item \emph{Buy \& Hold (B\&H):} a passive benchmark that holds the asset for the entire
+            evaluation period.
+    \end{itemize}
+
+  \item \textbf{Machine-learning-based methods}
+    \begin{itemize}
+      \item \emph{LSTM:} a recurrent network trained to predict next-step returns, with positions
+            determined by the sign of the prediction.
+    \end{itemize}
+
+  \item \textbf{Reinforcement-learning-based methods}
+    \begin{itemize}
+      \item \emph{PPO \cite{schulman2017proximal}:} Proximal Policy Optimisation trained directly
+            on the price series via the FinRL framework \cite{liu2021finrl}.
+      \item \emph{A2C:} Advantage Actor-Critic, also trained within FinRL.
+      \item \emph{DQN \cite{mnih2015human}:} Deep Q-Network adapted for discrete trading actions.
+      \item \emph{SAC \cite{haarnoja2018soft}:} Soft Actor-Critic, an off-policy actor-critic
+            algorithm that optimises trading strategies using entropy regularisation and soft
+            value functions in continuous action spaces.
+    \end{itemize}
+
+  \item \textbf{LLM-based methods}
+    \begin{itemize}
+      \item \emph{INVESTORBENCH \cite{he2024investorbench}:} a benchmark for financial
+            decision-making tasks with LLM-based agents.
+      \item \emph{FinGPT \cite{yang2023fingpt}:} an open-source LLM framework for converting
+            financial news and prices into financial decisions.
+      \item \emph{FinMem \cite{yu2024finmem}:} an advanced LLM agent framework for automated
+            trading, fine-tuned to boost investment returns.
+      \item \emph{FinAgent \cite{zhang2024finagent}:} a general-purpose LLM agent platform for
+            financial applications, including trading strategy generation and execution.
+    \end{itemize}
+\end{itemize}
+\section{Results \& Comparisons}
+
 
 % ── Chapter 6 – Conclusion ───────────────────────────────────────────────────
 \chapter{Conclusion}

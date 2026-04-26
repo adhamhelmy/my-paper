@@ -1,24 +1,41 @@
 # Thesis Notes
 
 ## My Notes
-<!-- Your own notes, thoughts, ideas go here -->
-- Remove investor requirements section?
-- Perfromance measures section.
-
+<!-- notes, thoughts, ideas go here -->
+- 2.2, how are different architectures used differently, which is used as buy/sell and which is used in portfolio management, and how?
+- Stock price forecasting, integrate qualitative information-how/focus on time-series forecasting with LLMs, how/why?
+- Sentiment analysis, lexical scoring to agent-based approaches, what?
+- Automated trading and decision systems, autonomous trading systems, what? integrate sentiment analysis for trading and portfolio management/incorporate reinforcement learning, sorry?
+- enhance model interpretability, how?
+- traditional optimisation methods to reinforcement learning, more pls.
+- addressed the reliability of LLMs in equity markets, how?
+- Reinforcement Fine-Tuning, outline the difference between rl-driven and rft.
+- 2.3, tie all this back to your approach, outline the paper categorization as investment research/alpha-mining/rl-driven, tie back to fine-tuning papers that show
+enhancement, tie back to rl-driven that show enhancement, tie back to alpha-mining concept, and more importantly to rlhf and rlmf, mention lora adapters and peft.
+- Methodology, add more math, more on grpo, mention other algorithms, why grpo? deepseek did what? how?
+- System overview, summarize and explain approach and tie back to related work, and algorithm.
+- what is trading strategy? what is output?
+- what is backtesting? more on reward function. say something in the end?
 
 ---
 
 ## To-Do
+- Rewrite research gap
+- Refactor contributions
 - Include reference for RNN and LSTM
-- Split background and related work
-- Related Work section
+- Include references for healthcare [60], education [61]
+- Include reference for chatgpt if possible
+- shown in ?? 4.1
+- Rewrite thesis outline (last)
+- Rewrite as paper
+
 
 ### Writing
 - [ ] Write the **Abstract**
-- [ ] Fill in Chapter 4 (Experiments) — datasets, hardware, baselines, evaluation metrics
-- [ ] Fill in Chapter 4 Results section with actual numbers
-- [ ] Fill in Chapter 4 Analysis / ablation studies
-- [ ] Write Chapter 5 (Conclusion) — Summary, Limitations, Future Work
+- [ ] Fill in Chapter 5 (Experiments) — datasets, hardware, baselines, evaluation metrics
+- [ ] Fill in Chapter 5 Results section with actual numbers
+- [ ] Fill in Chapter 5 Analysis / ablation studies
+- [ ] Write Chapter 6 (Conclusion) — Summary, Limitations, Future Work
 
 ### Citations — Missing `\cite{}` keys
 These are placeholders in the text that need real references added to `references.bib`:
