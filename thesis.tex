@@ -1,11 +1,10 @@
-\documentclass[12pt, a4paper]{report}
+\documentclass[conference]{IEEEtran}
 
 % ── Packages ──────────────────────────────────────────────────────────────────
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[english]{babel}
-\usepackage{geometry}
-\geometry{margin=2.5cm}
 
 \usepackage{amsmath, amssymb, amsthm}   % math
 \usepackage{graphicx}                   % figures
@@ -13,8 +12,6 @@
 \usepackage{hyperref}                   % clickable refs
 \usepackage{cleveref}                   % smart cross-refs: \cref{}
 \usepackage{cite}                       % IEEE-style numbered citations
-\usepackage{setspace}
-\onehalfspacing
 
 \usepackage{listings}                   % code listings
 \usepackage{xcolor}
@@ -30,39 +27,32 @@
 \usepackage{algpseudocode}
 
 % ── Theorem environments ───────────────────────────────────────────────────────
-\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{proposition}[theorem]{Proposition}
 
 % ── Metadata ──────────────────────────────────────────────────────────────────
-\title{%
-  \textbf{LLM-Driven Algorithmic Trading: A Reinforcement Learning Fine-Tuning Framework} \\[0.5em]
-  \large A Master's Thesis
+\title{LLM-Driven Algorithmic Trading: A Reinforcement Learning Fine-Tuning Framework}
+\author{%
+  \IEEEauthorblockN{Adham Helmy}
+  \IEEEauthorblockA{Department of Computer Science\\
+  Supervised by Prof.\ Mohamed Ashour \& Prof.\ Ayman El Badawy}
 }
-\author{Adham Helmy \\ \small Supervisors: Prof. Mohamed Ashour \& Prof. Ayman El Badawy \\ \small Department of Computer Science}
-\date{\today}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{document}
 
-% ── Front matter ──────────────────────────────────────────────────────────────
 \maketitle
-\thispagestyle{empty}
-\newpage
 
 \begin{abstract}
 \end{abstract}
 
-\tableofcontents
-\listoffigures       % remove if you have no figures
-\listoftables        % remove if you have no tables
-
-% ── Chapter 1 – Introduction ─────────────────────────────────────────────────
-\chapter{Introduction}
+% ── Section 1 – Introduction ──────────────────────────────────────────────────
+\section{Introduction}
 \label{ch:intro}
 
-\section{Financial Markets}
+\subsection{Financial Markets}
 \label{sec:fin-markets}
 
   Financial markets are complex, nonlinear, and dynamic systems influenced by a wide range of factors.
@@ -71,7 +61,7 @@ modeling and decision-making in financial markets particularly challenging. As a
 and computational models have become essential tools for extracting meaningful information from market
 data and supporting trading and investment decisions.
 
-\section{Motivation for Intelligence}
+\subsection{Motivation for Intelligence}
 \label{sec:motivation}
 
 The complexity, uncertainty, and high dimensionality of financial markets motivate the use of
@@ -81,7 +71,7 @@ conditions. In contrast, intelligent methods---particularly those based on artif
 intelligence---can learn from data, capture nonlinear relationships, and adapt strategies in
 response to evolving market dynamics.
 
-\section{Problem Definition}
+\subsection{Problem Definition}
 \label{sec:problem}
 
 The goal of algorithmic trading is to exploit market volatility and price fluctuations through
@@ -91,7 +81,7 @@ strategies. To this end, we survey the literature on intelligence-based trading 
 which in the context of machine learning broadly fall into two categories:
 \emph{prediction-based methods} and \emph{reinforcement learning-based methods}.
 
-\section{Research Gap}
+\subsection{Research Gap}
 \label{sec:gap}
 
 Despite the rapid growth of research applying large language models (LLMs) to financial trading
@@ -102,7 +92,7 @@ methodologies designed to elicit structured, multi-step reasoning in financial d
 This gap suggests a promising opportunity to investigate whether explicitly reasoning-capable
 models can improve robustness, interpretability, and performance in financial market applications.
 
-\section{Contributions}
+\subsection{Contributions}
 \label{sec:contributions}
 
 The contributions of this paper are as follows:
@@ -114,7 +104,7 @@ The contributions of this paper are as follows:
         model for trading strategy generation.
   \end{itemize}
 
-\section{Thesis Outline}
+\subsection{Paper Outline}
 \label{sec:outline}
 
 The remainder of this paper is structured as follows.
@@ -128,8 +118,8 @@ proposed framework.
 benchmarks and frameworks from the literature.
 Finally, \cref{ch:conclusion} offers conclusions, reflections, and directions for future work.
 
-% ── Chapter 2 – Background ───────────────────────────────────────────────────
-\chapter{Background}
+% ── Section 2 – Background ────────────────────────────────────────────────────
+\section{Background}
 \label{ch:background}
 
 Algorithmic trading as a research area has gained considerable attention in recent years.
@@ -140,7 +130,7 @@ artificial intelligence, research on trading strategy design broadly follows two
 directions: \emph{prediction-based methods} and \emph{reinforcement learning-based methods}.
 
 % ── 2.1 ──────────────────────────────────────────────────────────────────────
-\section{Machine Learning and Prediction Models}
+\subsection{Machine Learning and Prediction Models}
 \label{sec:pred-models}
 
 
@@ -171,7 +161,7 @@ decision. Critically, higher prediction accuracy does not guarantee higher retur
 \cite{huang2024novel}. This motivates reinforcement learning, the second group of intelligent trading strategies.
 
 % ── 2.2 ──────────────────────────────────────────────────────────────────────
-\section{Reinforcement Learning}
+\subsection{Reinforcement Learning}
 \label{sec:rl}
 
 Following AlphaGo's \cite{silver2016mastering} defeat of the top human player in the game
@@ -223,7 +213,7 @@ actions and the critic evaluates them, providing a lower-variance signal for pol
 \cite{ge2022,lima2021,liu2020actorcritic,ponomarev2019,vishal2021}.
 
 % ── 2.3 ──────────────────────────────────────────────────────────────────────
-\section{Large Language Models in Finance}
+\subsection{Large Language Models in Finance}
 \label{sec:llms}
 
 The advancement of Large Language Models (LLMs) has revolutionised natural language
@@ -297,11 +287,11 @@ general-purpose models.
 \cite{bi2024,chiang2025} examine the practical potential and limitations of LLMs,
 underscoring the need for ongoing evaluation in this rapidly evolving field.
 
-% ── Chapter 3 – Related Work ─────────────────────────────────────────────────
-\chapter{Related Work}
+% ── Section 3 – Related Work ──────────────────────────────────────────────────
+\section{Related Work}
 \label{ch:related}
 
-\section{LLMs in Financial Trading}
+\subsection{LLMs in Financial Trading}
 \label{sec:llm-trading}
 
 As previously outlined, LLMs offer substantial potential across financial market applications. With
@@ -310,9 +300,9 @@ into two paradigms: \emph{LLMs as traders}, which directly generate buy, hold, o
 decisions from inputs such as price data, news, and financial reports and \emph{LLMs as alpha miners}, which generate alpha
 factors---quantitative signals encoding predictive information---rather than explicit trading decisions.
 
-\subsection{LLMs as Traders}
+\subsubsection{LLMs as Traders}
 \label{sec:llm-traders}
-Many studies incorporating LLMs as traders were mentioned in \cref{sec:llms}. Additionally, \cite{ding2026largelanguagemodelagent} further highlights 
+Many studies incorporating LLMs as traders were mentioned in \cref{sec:llms}. Additionally, \cite{ding2026largelanguagemodelagent} further highlights
 subcategories of LLM-based trading systems.
 
 \paragraph{News-Driven.}
@@ -331,7 +321,7 @@ The raw inputs are summarized into memories, relevant memories are retrieved and
 
 Debating among LLMs, proven to be an effective method to enhance the reasoning and factual validity, is also widely adopted in LLM financial agents.
 \cite{xing2024} proposed a debating framework where LLM agents with different roles debate each other, improving news sentiment classification performance.
-\cite{li2023tradinggpt} proposed a similar architecture to \cite{yu2023finmem} with an additional step that agents debate each other’s actions and reflections, improving robustness of reflections.
+\cite{li2023tradinggpt} proposed a similar architecture to \cite{yu2023finmem} with an additional step that agents debate each other's actions and reflections, improving robustness of reflections.
 
 \paragraph{Reinforcement Learning Driven.}
 
@@ -340,21 +330,21 @@ Backtesting provides a cost-effective method for generating high-quality feedbac
 \cite{koa2024explainable} proposed leveraging reinforcement learning with memorization and reflection modules, utilizing a series of predictions derived from financial market history to refine predictions in real-world markets.
 While, \cite{ding2023} developed a RL-based framework, where an LLM is used to generate embeddings from news headlines, which are then projected into the stock feature space.
 
-\subsection{LLM as an Alpha Miner}
+\subsubsection{LLM as an Alpha Miner}
 \label{sec:llm-alphaminer}
 
-Another effective approach is using LLMs as Alpha Miners, where the LLM generates alpha factors instead of directly making trading decisions. 
+Another effective approach is using LLMs as Alpha Miners, where the LLM generates alpha factors instead of directly making trading decisions.
 \cite{wang2024quantagent} demonstrated this by introducing a principled framework, comprising of a two-layer loop. In the inner loop,
 an agent takes in a general idea from a human trader and generates a script as its implementation.
 Another agent provides feedback to refine the script, the agent refines its responses by drawing from its knowledge base.
 While in the outer loop, committed code is backtested in real-world scenarios and the results are used to automatically enhance the knowledge base with new insights,
 enabling the agent to progressively approximate optimal behaviour with provable efficiency. In a subsequent research,
-\cite{wang2023alphagpt} propose a human in the loop on a similar architecture and experimental environment, 
-to provide a heuristic way to ``understand'' the ideas of quant researchers and outputs creative, insightful, and effective alphas. 
-Both studies demonstrates the effectiveness and efficiency of the LLM powered alpha mining, a conventionally resource intensive job, 
+\cite{wang2023alphagpt} propose a human in the loop on a similar architecture and experimental environment,
+to provide a heuristic way to ``understand'' the ideas of quant researchers and outputs creative, insightful, and effective alphas.
+Both studies demonstrates the effectiveness and efficiency of the LLM powered alpha mining, a conventionally resource intensive job,
 via a number of alpha mining experiments.
 
-\section{Reinforcement Fine-Tuning}
+\subsection{Reinforcement Fine-Tuning}
 \label{sec:rft}
 
 Reinforcement Fine-Tuning (RFT) adapts a pretrained language model using a scalar feedback
@@ -367,8 +357,8 @@ particularly effective for domain-specific tasks \cite{TODO-openai-rft} and enab
 alignment of model behaviour to objectives such as stylistic consistency, safety, or---most
 relevantly here---domain accuracy in financial decision-making.
 
-While, some studies use reinforcement learning as a module or part of the framework, 
-such as \cite{yu2023finmem, yu2024fincon, gu2024margin, ding2023}; others, more notably, 
+While, some studies use reinforcement learning as a module or part of the framework,
+such as \cite{yu2023finmem, yu2024fincon, gu2024margin, ding2023}; others, more notably,
 incorporate reinforcement fine-tuning, directly updating model weights in real-time to adapt and align the model to financial trading tasks \cite{saqur2024, ni2024, liu2023fingpt, zhao2024welsch}.
 
 \cite{saqur2024} introduces Reinforcement Learning from Market Feedback (RLMF),
@@ -377,14 +367,14 @@ enabling LLMs to adapt continuously to evolving market dynamics. \cite{liu2023fi
 an open-sourced framework that adapts general-purpose LLMs for applications,
 including robo-advisory and sentiment analysis for algorithmic trading using LoRA/QLoRA fine-tuning.
 Reinforcement learning can also be integrated with instruction finetuning to further refine model performance based on real-world feedback \cite{zhao2024welsch}.
-\cite{ni2024} introduces an advanced approach by employing LLMs instruction fine-tuned with a novel combination of instruction-based techniques and QLoRA compression. 
+\cite{ni2024} introduces an advanced approach by employing LLMs instruction fine-tuned with a novel combination of instruction-based techniques and QLoRA compression.
 
-% ── Chapter 4 – Methodology ──────────────────────────────────────────────────
-\chapter{Methodology}
+% ── Section 4 – Methodology ───────────────────────────────────────────────────
+\section{Methodology}
 \label{ch:method}
 
 % ── 4.1 ──────────────────────────────────────────────────────────────────────
-\section{Algorithm}
+\subsection{Algorithm}
 \label{sec:algorithm}
 
 The overarching objective of reinforcement learning is to increase the probability of
@@ -401,7 +391,7 @@ Unlike supervised learning, the optimal action cannot be known in advance; the a
 must infer it from the observed consequences of its decisions.
 
 
-\subsection{Reinforcement Learning from Human Feedback (RLHF)}
+\subsubsection{Reinforcement Learning from Human Feedback (RLHF)}
 \label{sec:rlhf}
 
 OpenAI popularised Reinforcement Learning from Human Feedback
@@ -413,13 +403,13 @@ against it.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/RLHF.png}
+  \includegraphics[width=\columnwidth]{figures/RLHF.png}
   \caption{RLHF training pipeline. A reward model trained on human preference data
            is used to guide policy optimisation.}
   \label{fig:rlhf}
 \end{figure}
 
-\subsection{Proximal Policy Optimisation (PPO)}
+\subsubsection{Proximal Policy Optimisation (PPO)}
 \label{sec:ppo}
 
 To implement RLHF in practice, Schulman et al.~\cite{schulman2017ppo} introduced Proximal Policy
@@ -430,7 +420,7 @@ policy} $\pi_{\theta_\text{old}}$ (a frozen copy of the original model), and a
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.85\textwidth]{figures/PPO.png}
+  \includegraphics[width=\columnwidth]{figures/PPO.png}
   \caption{PPO training loop. The generating policy is updated by maximising the
            clipped surrogate objective relative to the reference policy.}
   \label{fig:ppo}
@@ -454,7 +444,7 @@ hyperparameter. The clipping term prevents excessively large policy updates, pro
 training stability. An additional KL-divergence penalty with coefficient $\beta > 0$
 further constrains the policy from deviating too far from the reference.
 
-\subsection{Group Relative Policy Optimisation (GRPO)}
+\subsubsection{Group Relative Policy Optimisation (GRPO)}
 \label{sec:grpo}
 
 DeepSeek introduced Group Relative Policy Optimisation (GRPO) \cite{shao2024deepseekmath}
@@ -491,7 +481,7 @@ returns when back-tested or it does not. This makes GRPO an appropriate training
 algorithm for our setting.
 
 % ── 4.2 ──────────────────────────────────────────────────────────────────────
-\section{System Overview}
+\subsection{System Overview}
 \label{sec:system}
 
 Our implementation uses the \texttt{Unsloth} library \cite{unsloth2024} to load and
@@ -565,9 +555,9 @@ ordered from worst (most penalised) to best:
     \toprule
     Rank & Outcome & Reward \\
     \midrule
-    1 & No strategy generated, or class has empty methods & $-10$ (heavy penalty) \\
-    2 & Syntactically invalid code                        & $-3$ (heavy penalty) \\
-    3 & Strategy throws a runtime error during back-test  & $-2$ (heavy penalty) \\
+    1 & No strategy generated                             & $-10$ (heavy penalty) \\
+    2 & Syntax error                                      & $-3$  \\
+    3 & Runtime error                                     & $-2$  \\
     4 & Strategy generates no trading signals             & $-1$ \\
     5 & Strategy results in negative returns              & $0$ \\
     6 & Strategy results in positive returns              & $R$ (annual return) \\
@@ -584,19 +574,20 @@ all. For positive returns, the reward is set equal to the annualised return $R$,
 higher returns receive proportionally higher rewards, incentivising the model to
 discover increasingly profitable strategies.
 
-% ── Chapter 5 – Experiments ──────────────────────────────────────────────────
-\chapter{Experiments}
+% ── Section 5 – Experiments ───────────────────────────────────────────────────
+\section{Experiments}
 \label{ch:experiments}
 
-\section{Experimental Setup}
+\subsection{Experimental Setup}
 The model was trained on a single NVIDIA A100 GPU with 80GB of VRAM. We used the \texttt{Unsloth} library \cite{unsloth2024} to inference and
 fine-tune the language model. Model was trained for 500 steps, with a learning rate of 5e-6, weight decay of 0.01, adam optimizer and gradient accumulation steps set to 8. Model was tested before and after training to evaluate the improvement in strategy generation performance.
-The training process was monitored using Weights \& Biases \cite{wandb2024}, which provided real-time tracking of training metrics, rewards, and model outputs. 
+The training process was monitored using Weights \& Biases \cite{wandb2024}, which provided real-time tracking of training metrics, rewards, and model outputs.
 
-\section{Dataset}
-The proposed method was trained on historical stock prices of 38 US stocks, which are the constituents of the Dow Jones Industrial Average (DIJA) index, in addition to 8 additional stocks AMZN, COIN, GE, GOOGL, NFLX, NIO, TSLA, UVV, for the ten years from 2012-1-01 to 2022-12-31. The data was sourced from Alpha Vantage \cite{alphavantage2024}, a provider of free stock APIs. The data was preprocessed to ensure compatibility with the Backtrader framework. 
+\subsection{Dataset}
+The proposed method was trained on historical stock prices of 38 US stocks, which are the constituents of the Dow Jones Industrial Average (DIJA) index, in addition to 8 additional stocks AMZN, COIN, GE, GOOGL, NFLX, NIO, TSLA, UVV, for the ten years from 2012-1-01 to 2022-12-31. The data was sourced from Alpha Vantage \cite{alphavantage2024}, a provider of free stock APIs. The data was preprocessed to ensure compatibility with the Backtrader framework.
 And, tested against the same dataset, from 2022-1-01 to 2025-12-31, to evaluate model performance and compared against several baselines and benchmarks from the literature.
-\section{Evaluation Metrics}
+
+\subsection{Evaluation Metrics}
 We employ a widely used set of financial performance metrics to evaluate the generated trading
 strategies and compare against several baselines from the literature.
 These metrics include:
@@ -610,7 +601,7 @@ These metrics include:
   \end{equation}
 
   \item \textbf{Annualised Return (AR):} AR is the annualised average profit-and-loss (\%)
-  provided by an investment during trading.  
+  provided by an investment during trading.
   \begin{equation}
     \text{AR} = \left[\left(1 + \text{CuR}\right)^{\frac{365}{\text{Days Held}}} - 1\right] \times 100
   \end{equation} where Let $\text{CuR} = \sum_{t=1}^{T}
@@ -631,8 +622,8 @@ These metrics include:
   \end{equation}
 \end{itemize}
 
-\section{Baseline Methods}
-To contextualise the performance of our GRPO-trained model, we compare our model agains baseline, reinforcment learning-based, and LLM-based methods from the literature. 
+\subsection{Baseline Methods}
+To contextualise the performance of our GRPO-trained model, we compare our model agains baseline, reinforcment learning-based, and LLM-based methods from the literature.
 \begin{itemize}
   \item \textbf{Traditional rule-based strategies}
     \begin{itemize}
@@ -648,7 +639,7 @@ To contextualise the performance of our GRPO-trained model, we compare our model
 
   \item \textbf{Reinforcement-learning-based methods}
     \begin{itemize}
-      \item \emph{PPO \cite{schulman2017proximal}:} Proximal Policy Optimisation trained directly
+      \item \emph{PPO \cite{schulman2017ppo}:} Proximal Policy Optimisation trained directly
             on the price series via the FinRL framework \cite{liu2021finrl}.
       \item \emph{A2C:} Advantage Actor-Critic, also trained within FinRL.
       \item \emph{DQN \cite{mnih2015human}:} Deep Q-Network adapted for discrete trading actions.
@@ -659,28 +650,29 @@ To contextualise the performance of our GRPO-trained model, we compare our model
 
   \item \textbf{LLM-based methods}
     \begin{itemize}
-      \item \emph{INVESTORBENCH \cite{he2024investorbench}:} a benchmark for financial
+      \item \emph{INVESTORBENCH \cite{li2024investorbench}:} a benchmark for financial
             decision-making tasks with LLM-based agents.
       \item \emph{FinGPT \cite{yang2023fingpt}:} an open-source LLM framework for converting
             financial news and prices into financial decisions.
-      \item \emph{FinMem \cite{yu2024finmem}:} an advanced LLM agent framework for automated
+      \item \emph{FinMem \cite{yu2023finmem}:} an advanced LLM agent framework for automated
             trading, fine-tuned to boost investment returns.
       \item \emph{FinAgent \cite{zhang2024finagent}:} a general-purpose LLM agent platform for
             financial applications, including trading strategy generation and execution.
     \end{itemize}
 \end{itemize}
-\section{Results \& Comparisons}
+
+\subsection{Results \& Comparisons}
 
 
-% ── Chapter 6 – Conclusion ───────────────────────────────────────────────────
-\chapter{Conclusion}
+% ── Section 6 – Conclusion ────────────────────────────────────────────────────
+\section{Conclusion}
 \label{ch:conclusion}
 
-\section{Summary}
+\subsection{Summary}
 
-\section{Limitations}
+\subsection{Limitations}
 
-\section{Future Work}
+\subsection{Future Work}
 
 % ── Bibliography ─────────────────────────────────────────────────────────────
 \bibliographystyle{IEEEtran}
