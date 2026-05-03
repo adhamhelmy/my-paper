@@ -1211,8 +1211,6 @@
   year    = {2025},
   doi     = {10.3389/frai.2025.1608365}
 }
-@misc{TODO-healthcare,   author = {{TODO}}, year = {2024}, title = {{LLMs in healthcare --- fill in}}, howpublished = {TODO} }
-@misc{TODO-education,    author = {{TODO}}, year = {2024}, title = {{LLMs in education --- fill in}}, howpublished = {TODO} }
 @misc{ding2026largelanguagemodelagent,
       title={Large Language Model Agent in Financial Trading: A Survey}, 
       author={Han Ding and Yinheng Li and Junhao Wang and Hang Chen and Doudou Guo and Yunbai Zhang},
@@ -1276,18 +1274,16 @@
   primaryClass  = {cs.CL},
 }
 
-@article{christiano2017rlhf,
+@inproceedings{christiano2017rlhf,
   author        = {Christiano, Paul F. and Leike, Jan and Brown, Tom B. and Martic, Miljan and Legg, Shane and Amodei, Dario},
   title         = {Deep Reinforcement Learning from Human Preferences},
-  journal       = {Advances in Neural Information Processing Systems},
+  booktitle     = {Advances in Neural Information Processing Systems},
   volume        = {30},
+  pages         = {4299--4308},
   year          = {2017},
-  eprint        = {1706.03741},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.LG},
 }
 
-@article{schulman2017ppo,
+@misc{schulman2017ppo,
   author        = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg},
   title         = {Proximal Policy Optimization Algorithms},
   year          = {2017},
@@ -1296,11 +1292,20 @@
   primaryClass  = {cs.LG},
 }
 
-@article{shao2024deepseekmath,
+@misc{shao2024deepseekmath,
   author        = {Shao, Zhihong and Wang, Peiyi and Zhu, Qihao and Xu, Runxin and Song, Junxiao and Zhang, Mingchuan and Li, Y. K. and Wu, Y. and Guo, Daya},
   title         = {{DeepSeekMath}: Pushing the Limits of Mathematical Reasoning in Open Language Models},
   year          = {2024},
   eprint        = {2402.03300},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+}
+
+@misc{deepseekr1,
+  author        = {{DeepSeek-AI}},
+  title         = {{DeepSeek-R1}: Incentivizing Reasoning Capability in {LLMs} via Reinforcement Learning},
+  year          = {2025},
+  eprint        = {2501.12948},
   archivePrefix = {arXiv},
   primaryClass  = {cs.CL},
 }
@@ -1319,7 +1324,127 @@
   howpublished  = {\url{https://github.com/mementum/backtrader}},
 }
 
-@misc{TODO-alpha-factor, author = {{TODO}}, year = {2024}, title = {{Alpha factors definition --- fill in}}, howpublished = {TODO} }
-@misc{TODO-llm-trader-refs,  author = {{TODO}}, year = {2024}, title = {{LLM as trader references --- fill in}}, howpublished = {TODO} }
-@misc{TODO-alpha-miner-refs, author = {{TODO}}, year = {2024}, title = {{LLM as alpha miner references --- fill in}}, howpublished = {TODO} }
-@misc{TODO-openai-rft,   author = {{TODO}}, year = {2024}, title = {{Reinforcement fine-tuning reference --- fill in}}, howpublished = {TODO} }
+@misc{openai2024rft,
+  author       = {{OpenAI}},
+  title        = {Introducing Reinforcement Fine-Tuning},
+  year         = {2024},
+  howpublished = {\url{https://openai.com/index/reinforcement-finetuning/}},
+}
+
+% ── Baseline methods ──────────────────────────────────────────────────────────
+
+@article{mnih2015human,
+  author    = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others},
+  title     = {Human-level control through deep reinforcement learning},
+  journal   = {Nature},
+  volume    = {518},
+  number    = {7540},
+  pages     = {529--533},
+  year      = {2015},
+  doi       = {10.1038/nature14236},
+}
+
+@inproceedings{liu2021finrl,
+  author    = {Liu, Xiao-Yang and Yang, Hongyang and Chen, Qian and Zhang, Runjia and Yang, Liuqing and Xiao, Bowen and Wang, Christina Dan},
+  title     = {{FinRL}: a deep reinforcement learning library for automated stock trading in quantitative finance},
+  booktitle = {NeurIPS 2020 Workshop on Deep Reinforcement Learning},
+  year      = {2021},
+  eprint    = {2011.09607},
+  archivePrefix = {arXiv},
+}
+
+@misc{yang2023fingpt,
+  author        = {Yang, Hongyang and Liu, Xiao-Yang and Wang, Christina Dan},
+  title         = {{FinGPT}: Open-Source Financial Large Language Models},
+  year          = {2023},
+  eprint        = {2306.06031},
+  archivePrefix = {arXiv},
+}
+
+@misc{zhang2024finagent,
+  author        = {Zhang, Wentao and Zhao, Lingxuan and Xia, Haochong and Sun, Shuo and Sun, Jiaze and Qin, Molei and Li, Xinyi and Zhao, Yuqing and Zhao, Yilei and Cen, Xinyu and others},
+  title         = {{FinAgent}: a multimodal foundation agent for financial trading: tool-augmented, diversified, and generalist},
+  year          = {2024},
+  eprint        = {2402.18485},
+  archivePrefix = {arXiv},
+}
+
+@misc{wandb2024,
+  author       = {{Weights \& Biases}},
+  title        = {Weights \& {B}iases: machine learning experiment tracking},
+  year         = {2024},
+  howpublished = {\url{https://wandb.ai}},
+}
+
+@misc{alphavantage2024,
+  author       = {{Alpha Vantage}},
+  title        = {Alpha Vantage: free {API}s for realtime and historical financial data},
+  year         = {2024},
+  howpublished = {\url{https://www.alphavantage.co}},
+}
+
+@article{hochreiter1997lstm,
+  author  = {Hochreiter, Sepp and Schmidhuber, J{\"u}rgen},
+  title   = {Long Short-Term Memory},
+  journal = {Neural Computation},
+  volume  = {9},
+  number  = {8},
+  pages   = {1735--1780},
+  year    = {1997},
+}
+
+@incollection{rumelhart1986rnn,
+  author    = {Rumelhart, David E. and Hinton, Geoffrey E. and Williams, Ronald J.},
+  title     = {Learning representations by back-propagating errors},
+  booktitle = {Nature},
+  volume    = {323},
+  pages     = {533--536},
+  year      = {1986},
+}
+
+@article{mehandru2024evaluating,
+  author  = {Mehandru, Nidhi and Miao, Brian Y. and Almaraz, Eric R. and others},
+  title   = {Evaluating large language models as agents in the clinic},
+  journal = {npj Digital Medicine},
+  volume  = {7},
+  pages   = {84},
+  year    = {2024},
+  doi     = {10.1038/s41746-024-01083-y},
+}
+
+@misc{zhang2024simulating,
+  author        = {Zhang, Zheyuan and Zhang-Li, Daniel and Yu, Jifan and Gong, Linlu and Zhou, Jinchang and Liu, Zhiyuan and Hou, Lei and Li, Juanzi},
+  title         = {Simulating Classroom Education with {LLM}-Empowered Agents},
+  year          = {2024},
+  eprint        = {2406.19226},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+}
+
+@misc{hu2021lora,
+  author        = {Hu, Edward J. and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Wang, Lu and Chen, Weizhu},
+  title         = {{LoRA}: Low-Rank Adaptation of Large Language Models},
+  year          = {2021},
+  eprint        = {2106.09685},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+}
+
+@misc{dettmers2023qlora,
+  author        = {Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
+  title         = {{QLoRA}: Efficient Finetuning of Quantized {LLMs}},
+  year          = {2023},
+  eprint        = {2305.14314},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+}
+
+@misc{achiam2023gpt4,
+  author        = {Achiam, Josh and Adler, Steven and Agarwal, Sandhini and others},
+  title         = {{GPT-4} Technical Report},
+  year          = {2023},
+  eprint        = {2303.08774},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+}
+
