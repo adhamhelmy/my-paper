@@ -168,12 +168,12 @@ dependencies in sequential data.
 
 
 The body of literature in this space is extensive \cite{huang2024novel}.
-Studies \cite{roondiwala2017predicting,shah2021stock,sunny2020deep,zhang2021forecasting,yu2022research,qiao2022prediction,md2022novel,bansal2022stock}
+Studies \cite{zhang2021forecasting,qiao2022prediction,md2022novel}
 used variations of LSTM and BiLSTM networks.
 Hybrid models combining CNN, BiLSTM, and different attention mechanisms were employed in
-\cite{lu2020cnn,wu2021graph,huang2021financial,juairiah2022stock,kumar2022ensemble,xu2022hybrid,pholsri2023intraday,shi2023integrated}.
+\cite{lu2020cnn,huang2021financial,shi2023integrated}.
 News headlines and sentiment analysis techniques were further integrated in
-\cite{sridhar2021news,sharaf2022efficient}. These contributions represent only a fraction of the current research
+\cite{sridhar2021news}. These contributions represent only a fraction of the current research
 efforts in this space.
 
 
@@ -212,7 +212,7 @@ $Q(s, a)$---the expected cumulative return from taking action $a$ in state $s$ a
 following the optimal policy. The optimal policy is derived indirectly by selecting the
 action that maximises $Q(s, a)$ at each step. Implementations of value-based Deep
 Reinforcement Learning (DRL) in single-asset trading include
-\cite{bajpai2021,brim2022,carta2021,chakole2020,cheng2021,corazza2019,cornalba2022,dang2020,deoliveira2020,huang2023drl,khare2023,li2022,liu2023drl,luo2023,ma2021,nan2022,pavel2021,shi2021,taghian2022,theate2021,tran2023,ye2023,zhou2021}.
+\cite{carta2021,huang2023drl,taghian2022,theate2021,ye2023}.
 Notably, value-based methods are the most widely adopted DRL approach for single-asset
 trading strategies \cite{huang2024novel}.
 
@@ -225,7 +225,7 @@ value function; instead, they directly learn a stochastic policy $\pi_\theta(a \
 maps states to a distribution over actions, optimising the policy parameters $\theta$ to
 maximise the expected cumulative return \cite{sutton1999pg}. DRL trading strategies
 implemented with policy-based methods include
-\cite{lele2020,liu2021policy,mahayana2022,wang2021policy,xiao2023}.
+\cite{lele2020,liu2021policy,wang2021policy}.
 
 \paragraph{Actor-Critic}
 \label{sec:actor-critic}
@@ -235,7 +235,7 @@ updates the policy, while a \emph{critic} estimates the value function. The acto
 actions and the critic evaluates them, providing a lower-variance signal for policy updates
 \cite{xiong2018}. This combination enhances both stability and learning efficiency
 \cite{yang2020}. Actor-critic DRL has been applied to trading strategies in
-\cite{ge2022,lima2021,liu2020actorcritic,ponomarev2019,vishal2021}.
+\cite{ge2022,lima2021,liu2020actorcritic}.
 
 % ── 2.3 ──────────────────────────────────────────────────────────────────────
 \section{Large Language Models in Finance}
@@ -247,22 +247,22 @@ healthcare \cite{mehandru2024evaluating}, education \cite{zhang2024simulating}, 
 sector, which has attracted particularly significant research interest.
 
 Since the public release of ChatGPT \cite{achiam2023gpt4}, research into LLM applications in stock and equity
-markets has grown rapidly. A comprehensive survey \cite{TODO-survey84} of 84
+markets has grown rapidly. A comprehensive survey \cite{jadhav2025llmequity} of 84
 relevant papers categorises the work by end use into eight areas: stock price prediction,
 sentiment analysis, automated trading, investment analysis, portfolio management, risk
 management, financial data generation, and benchmarking.
 
 \paragraph{Stock price forecasting.}
 A significant body of work centres on predicting stock prices. Several studies
-\cite{shi2024,ni2024,lee2024,ding2023,swamy2024,tong2024,cheng2023llm,fatemi2024,deng2024,di2024,guo2024,tandon2024,bhat2024,liang2024,chen2022llm,guo2024hauptmann,vidal2024,lopezlira2023}
+\cite{ni2024,ding2023,guo2024hauptmann,lopezlira2023}
 integrate qualitative information---such as news and analyst reports---into their forecasting
-pipelines, while \cite{valeyre2024,wang2024ts,chen2024ts,voigt2024,wang2024b} focus on
+pipelines, while \cite{valeyre2024,wang2024ts,wang2024b} focus on
 time-series forecasting with LLMs.
 
 \paragraph{Sentiment analysis.}
 Research in this category focuses on extracting and interpreting sentiment from a range of
 sources such as news, social media, and financial reports.
-\cite{deng2022reddit,das2024wealthguide,wu2024llmnews,zhao2024welsch,aparicio2024,liu2024sentiment,xing2024,dolphin2024,yu2023bench,kirtac2024}
+\cite{deng2022reddit,xing2024,kirtac2024}
 extract sentiment insights from financial text, reflecting methodologies ranging from basic
 lexical scoring to agent-based approaches.
 Sentiment scoring is also featured in \cite{bond2023,lefort2024}, converting sentiment into
@@ -270,14 +270,14 @@ numerical signals that directly inform trading strategies.
 
 \paragraph{Automated trading and decision systems.}
 Many research efforts are dedicated to building autonomous trading systems
-\cite{yu2024fincon,kou2024,zhang2024stockagent,xiao2024trading,li2023tradinggpt,yu2023finmem,wang2024trading,li2024cryptotrade}.
+\cite{yu2024fincon,li2023tradinggpt,yu2023finmem,li2024cryptotrade}.
 Some works additionally integrate sentiment analysis for trading and portfolio management
-\cite{konstantinidis2024,chen2024wisdom}.
+\cite{konstantinidis2024}.
 \cite{saqur2024} incorporate reinforcement learning, while \cite{yang2024finrobot} provide
 an agent platform that broadens access for researchers and practitioners.
 
 \paragraph{Investment and equity research.}
-\cite{papasotiriou2024,li2023multimodal,zhou2024finrobot,yue2023,kim2024} use LLMs to
+\cite{papasotiriou2024,li2023multimodal,zhou2024finrobot} use LLMs to
 automate investment and equity research and analysis.
 \cite{fatouros2024} propose a framework for stock selection, which \cite{fatouros2025}
 extends and optimises for portfolio management.
@@ -288,13 +288,13 @@ interpretability \cite{koa2024explainable,lopezlira2023,tong2024,zhao2024portfol
 comparing interpretability across general-purpose LLMs \cite{abdelsamie2024}.
 
 \paragraph{Portfolio management.}
-\cite{lu2023chatgpt,ko2024,huang2024portfolio,zhao2024portfolio,perlin2024} focus on
+\cite{ko2024,huang2024portfolio,zhao2024portfolio} focus on
 portfolio management using approaches ranging from traditional optimisation methods to
 reinforcement learning.
 Portfolio management advice is explored by \cite{fieberg2024,lu2025}.
 
 \paragraph{Risk management.}
-\cite{glasserman2023,park2024,koa2024temporal,yang2025twinmarket} addressed the reliability of LLMs in equity markets and the identification of
+\cite{park2024,koa2024temporal} addressed the reliability of LLMs in equity markets and the identification of
 unusual market conditions or portfolio crashes.
 
 \paragraph{Financial content generation and data integration.}
@@ -303,9 +303,9 @@ and equity research reports.
 \cite{liu2023fingpt} introduce FinGPT, a framework for democratising access to financial LLMs.
 
 \paragraph{Benchmarking and surveys.}
-\cite{zhao2024llmsurvey,nie2024survey,kong2024applications,kong2024models,ding2024survey}
+\cite{zhao2024llmsurvey,nie2024survey,ding2024survey}
 offer broad overviews of LLM applications in finance.
-\cite{li2024investorbench,mateega2025,krause2023} focus on benchmark development, enabling
+\cite{li2024investorbench,mateega2025} focus on benchmark development, enabling
 more standardised comparisons and evaluations of LLM performance in financial tasks.
 \cite{abdelsamie2024} benchmark specialised financial LLMs against human analysts and
 general-purpose models.
@@ -322,14 +322,14 @@ Within this categorization, our approach falls broadly under Investment and equi
 \label{sec:llm-trading}
 
 As previously outlined, LLMs offer substantial potential across financial market applications. With
-a focus on trading specifically, implementations are broadly categorised \cite{ding2026largelanguagemodelagent}
+a focus on trading specifically, implementations are broadly categorised \cite{ding2024survey}
 into two paradigms: \emph{LLMs as traders}, which directly generate buy, hold, or sell
 decisions from inputs such as price data, news, and financial reports and \emph{LLMs as alpha miners}, which generate alpha
 factors---quantitative signals encoding predictive information---rather than explicit trading decisions.
 
 \subsection{LLMs as Traders}
 \label{sec:llm-traders}
-Many studies incorporating LLMs as traders were mentioned in \cref{sec:llms}. Additionally, \cite{ding2026largelanguagemodelagent} further highlights 
+Many studies incorporating LLMs as traders were mentioned in \cref{sec:llms}. Additionally, \cite{ding2024survey} further highlights 
 subcategories of LLM-based trading systems.
 
 \paragraph{News-Driven.}
@@ -342,7 +342,7 @@ While, more advanced architectures, involved summarisation and reasoning to iden
 
 Reflection, built on extracted memory using summarization, high-level knowledge and insights are progressively aggregated from raw memories and observations \cite{park2023generative}.
 The raw inputs are summarized into memories, relevant memories are retrieved and integrated with new observations to produce reflections, which are then utilized to generate trading decisions \cite{yu2023finmem}.
-\cite{zhang2024multimodal} further proposes a multimodal agent that takes in numeric, text and image data. And, incorporates technical indicators and a human analyst to more effectively capture market dynamics.
+\cite{zhang2024finagent} further proposes a multimodal agent that takes in numeric, text and image data. And, incorporates technical indicators and a human analyst to more effectively capture market dynamics.
 
 \paragraph{Debate-Driven.}
 
@@ -941,11 +941,11 @@ Entries marked ``—'' indicate the model produced no valid strategy for that as
     \addlinespace
     LLM-based  & FinGPT          & -5.46 &-0.17 & 16.23 & 42.93 & 1.10 & 18.94 & 12.28 & 0.44 & 13.00 & 25.10 & 0.97 &  9.84 & 38.43 & 0.75 & 31.47 \\
                & FinMem          & 23.78 & 1.11 & 10.39 & 40.07 & 1.03 & 18.53 & 31.27 & 1.11 &  8.97 & 40.58 & 1.50 &  7.48 & 50.04 & 0.92 & 25.77 \\
-               & FinAgent        & \textbf{31.90} & \textbf{1.43} & 10.40 & \textbf{65.10} & \textbf{1.61} & 13.20 & 56.15 & 1.78 &  8.45 & 44.74 & 1.79 &  5.57 & \textbf{92.27} & \textbf{2.01} & 12.14 \\
+               & FinAgent        & 31.90 & 1.43 & 10.40 & 65.10 & 1.61 & 13.20 & 56.15 & 1.78 &  8.45 & 44.74 & 1.79 &  5.57 & 92.27 & 2.01 & 12.14 \\
     \midrule
     Ours       & Llama-3.1-8B (ft.)  & {—} & {—} & {—} & 0.24 & -1.72 & 0.63 & 0.09 & -9.42 & 0.18 & 4.85 & 0.28 & 13.73 & 1.04 & 0.00 & 17.05 \\
-               & Qwen2.5-7B (ft.)    & 25.43 & 1.34 & 15.57 & 19.03 & \textbf{1.62} & 22.16 & 16.11 & 0.94 & 13.02 & 23.26 & 0.70 & 25.60 & 12.85 & 0.92 & 15.72 \\
-               & Qwen2.5-32B (ft.)   & 25.23 & 1.34 & 15.57 & 25.10 & 0.49 & 41.41 & \textbf{27.41} & \textbf{0.96} & \textbf{12.87} & \textbf{25.99} & \textbf{0.79} & 26.65 & 25.41 & 0.35 & 63.55 \\
+               & Qwen2.5-7B (ft.)    & 25.43 & 1.34 & 15.57 & 19.03 & 1.62 & 22.16 & 16.11 & 0.94 & 13.02 & 23.26 & 0.70 & 25.60 & 12.85 & 0.92 & 15.72 \\
+               & Qwen2.5-32B (ft.)   & 25.23 & 1.34 & 15.57 & 25.10 & 0.49 & 41.41 & 27.41 & 0.96 & 12.87 & 25.99 & 0.79 & 26.65 & 25.41 & 0.35 & 63.55 \\
     \bottomrule
   \end{tabular}}
 \end{table}
